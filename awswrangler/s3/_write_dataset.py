@@ -39,7 +39,7 @@ def _to_partitions(
     for keys, subgroup in df.groupby(by=partition_cols, observed=True):
         subgroup = subgroup.drop(partition_cols, axis="columns")
         keys = (keys,) if not isinstance(keys, tuple) else keys
-        subdir = "/".join([f"{name}={val}" for name, val in zip(partition_cols, keys)])
+        subdir = "/".join([f"{val}" for name, val in zip(partition_cols, keys)])
         prefix: str = f"{path_root}{subdir}/"
         if mode == "overwrite_partitions":
             if (table_type == "GOVERNED") and (table is not None) and (database is not None):
